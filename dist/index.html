@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="mk">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#141514"><meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Интерактивно демо за онлајн закажување — Heads Up Barbershop, Струмица.">
+  <title>Heads Up Barbershop · Закажи термин</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="demo-banner"><span class="demo-dot"></span><strong>DEMO VERSION</strong><span class="banner-copy">Изработено за Heads Up Barbershop</span></div>
+  <header class="topbar"><a class="brand" href="#" aria-label="Heads Up почетна"><span class="brand-symbol">H<span>↗</span></span><span>HEADS UP<small>BARBERSHOP · STRUMICA</small></span></a><span class="concept-label">BOOKING CONCEPT / 01</span><button class="text-button" id="reset-demo" title="Избриши ги само пробните резервации">Ресетирај демо ↺</button></header>
+  <nav class="view-nav" aria-label="Избери приказ"><button id="customer-tab" class="view-tab active" aria-pressed="true"><span>↗</span> За клиенти</button><button id="admin-tab" class="view-tab" aria-pressed="false"><span>▦</span> Берберска конзола</button><span class="nav-note">Твојот термин. Твојот стил.</span></nav>
+  <main id="app"></main>
+  <footer><span>HEADS UP <span class="muted">/ Струмица</span></span><p>Независен демо-концепт, не е официјална страница. Услугите, цените, берберите и слободните термини се примерни. Нема вистински резервации или испраќање пораки.</p><a href="https://digitermin.com/en/salon/head-s-up-barbershop" target="_blank" rel="noopener noreferrer">Јавен профил ↗</a></footer>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <dialog id="success-dialog" aria-labelledby="success-title"></dialog>
+</body>
+</html>

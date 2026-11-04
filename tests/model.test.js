@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {seedBookings,isFree,availableBarber,dailyStats,todayKey,addDays} from '../dist/model.js';
+const day='2026-10-19';
+test('overlapping appointments are blocked, adjacent appointments are allowed',()=>{const b=seedBookings(day);assert.equal(isFree(b,day,'10:20','viktor',30),false);assert.equal(isFree(b,day,'10:30','viktor',30),true);assert.equal(isFree(b,day,'10:00','marko',30),true);});
+test('a 45 minute service cannot overlap a later booking',()=>{assert.equal(isFree(seedBookings(day),day,'11:20','viktor',45),false);});
+test('any barber assigns a free barber and respects service length',()=>{const b=seedBookings(day);assert.equal(availableBarber(b,day,'10:00','any','hair'),'marko');assert.equal(availableBarber(b,day,'11:20','any','combo'),null);});
+test('cancellation frees capacity and removes revenue, completion retains revenue',()=>{const b=seedBookings(day);assert.deepEqual(dailyStats(b,day),{count:4,revenue:1250,completed:1});b[0].status='cancelled';assert.equal(isFree(b,day,'10:00','viktor',30),true);assert.deepEqual(dailyStats(b,day),{count:3,revenue:950,completed:0});});
+test('closing time and distinct dates are respected',()=>{assert.equal(isFree([],day,'17:40','viktor',30),false);assert.equal(isFree([],day,'09:40','viktor',30),false);assert.equal(isFree([],day,'17:30','viktor',30),true);assert.equal(isFree(seedBookings(day),'2026-10-20','10:00','viktor',30),true);});
+test('calendar uses Skopje date and handles month boundaries',()=>{assert.equal(todayKey(new Date('2026-10-19T22:30:00Z')),'2026-10-20');assert.equal(addDays('2026-10-31',1),'2026-11-01');});
